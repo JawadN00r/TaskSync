@@ -247,21 +247,21 @@
           "default": 0,
           "minimum": 0,
           "scope": "window",
-          "description": "Main text font size for the TaskSync UI, in px. Set to 0 to keep deriving from the current VS Code font size."
+          "description": "Main text font size for the TaskSync UI, in px. Set to 0 to keep TaskSync's default master-style text scale."
         },
         "tasksync.headerFontSize": {
           "type": "number",
           "default": 0,
           "minimum": 0,
           "scope": "window",
-          "description": "Header font size for the TaskSync UI, in px. Set to 0 to keep the default header scale."
+          "description": "Header font size for the TaskSync UI, in px. Set to 0 to keep TaskSync's default master-style header scale."
         },
         "tasksync.inputFontSize": {
           "type": "number",
           "default": 0,
           "minimum": 0,
           "scope": "window",
-          "description": "Chat input font size for the TaskSync UI, in px. Set to 0 to keep the default input scale."
+          "description": "Chat input font size for the TaskSync UI, in px. Set to 0 to keep TaskSync's default master-style input scale."
         },
         "tasksync.agentOrchestration": {
           "type": "boolean",

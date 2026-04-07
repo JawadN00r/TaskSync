@@ -234,9 +234,9 @@ In VS Code Settings (search "tasksync"):
 - `tasksync.agentOrchestration`: Keep separate TaskSync agent sessions, the sessions list, switching, and split view. Turn it off to force single-session routing in the current workspace. (default: true)
 
 **Display:**
-- `tasksync.fontSize`: Main TaskSync text size in px. `0` keeps the default VS Code-derived text scale.
-- `tasksync.headerFontSize`: Header text size in px. `0` keeps the default TaskSync header scale.
-- `tasksync.inputFontSize`: Chat input text size in px. `0` keeps the default TaskSync input scale.
+- `tasksync.fontSize`: Main TaskSync text size in px. `0` keeps the default TaskSync master-style text scale.
+- `tasksync.headerFontSize`: Header text size in px. `0` keeps the default TaskSync master-style header scale.
+- `tasksync.inputFontSize`: Chat input text size in px. `0` keeps the default TaskSync master-style input scale.
 
 Most other settings (Autopilot, timeout, human-like delay, sound, etc.) are managed through the TaskSync Settings modal (gear icon).
 

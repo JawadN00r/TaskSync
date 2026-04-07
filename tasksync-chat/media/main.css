@@ -18,10 +18,15 @@
     --textarea-max-height: 120px;
     --tasksync-font-size-base: var(--vscode-font-size);
     --tasksync-header-font-size: calc(var(--tasksync-font-size-base) + 7px);
-    --tasksync-input-font-size: calc(var(--tasksync-font-size-base) + 2px);
-    --tasksync-font-size-xs: var(--tasksync-font-size-base);
-    --tasksync-font-size-sm: calc(var(--tasksync-font-size-base) + 1px);
-    --tasksync-font-size-md: calc(var(--tasksync-font-size-base) + 2px);
+    --tasksync-header-font-size-md: max(0px, calc(var(--tasksync-header-font-size) - 6px));
+    --tasksync-header-font-size-sm: max(0px, calc(var(--tasksync-header-font-size) - 7px));
+    --tasksync-input-font-size: var(--tasksync-font-size-base);
+    --tasksync-input-font-size-sm: max(0px, calc(var(--tasksync-input-font-size) - 1px));
+    --tasksync-input-font-size-xs: max(0px, calc(var(--tasksync-input-font-size) - 2px));
+    --tasksync-font-size-xxs: max(0px, calc(var(--tasksync-font-size-base) - 2px));
+    --tasksync-font-size-xs: max(0px, calc(var(--tasksync-font-size-base) - 1px));
+    --tasksync-font-size-sm: var(--tasksync-font-size-base);
+    --tasksync-font-size-md: calc(var(--tasksync-font-size-base) + 1px);
 }
 
 html,
@@ -663,7 +668,7 @@ body {
 }
 
 .sessions-panel-subtitle {
-    font-size: var(--tasksync-font-size-xs);
+    font-size: var(--tasksync-font-size-xxs);
     color: var(--vscode-descriptionForeground);
 }
 
@@ -1259,7 +1264,7 @@ body:not(.remote-mode) .changes-modal-overlay {
 }
 
 .changes-title {
-    font-size: var(--tasksync-header-font-size);
+    font-size: var(--tasksync-header-font-size-md);
     font-weight: 600;
     color: var(--vscode-foreground);
 }
@@ -1704,7 +1709,7 @@ body:not(.remote-mode) .changes-modal-overlay {
     }
 
     .changes-title {
-        font-size: 13px;
+        font-size: var(--tasksync-header-font-size-sm);
     }
 
     .change-item {
@@ -2306,7 +2311,7 @@ textarea#chat-input::-webkit-scrollbar {
 textarea#chat-input::placeholder {
     color: var(--vscode-input-placeholderForeground);
     opacity: 1;
-    font-size: var(--tasksync-input-font-size);
+    font-size: var(--tasksync-input-font-size-xs);
     /* Ensure placeholder is visible even with transparent text color */
 }
 
@@ -2542,7 +2547,7 @@ button#send-btn:disabled {
 }
 
 .history-modal-title {
-    font-size: var(--tasksync-header-font-size);
+    font-size: var(--tasksync-header-font-size-sm);
     font-weight: 600;
     color: var(--vscode-foreground);
 }
@@ -3238,7 +3243,7 @@ button#send-btn:disabled {
 
 .settings-modal-title {
     flex: 1;
-    font-size: var(--tasksync-header-font-size);
+    font-size: var(--tasksync-header-font-size-sm);
     font-weight: 600;
     color: var(--vscode-foreground);
 }
@@ -3774,7 +3779,7 @@ button#send-btn:disabled {
     width: 60px !important;
     min-width: 60px;
     padding: 4px 8px;
-    font-size: var(--tasksync-input-font-size);
+    font-size: var(--tasksync-input-font-size-sm);
 }
 
 .form-actions {
@@ -3834,7 +3839,7 @@ button#send-btn:disabled {
 }
 
 .timeout-warning-title {
-    font-size: var(--tasksync-header-font-size);
+    font-size: var(--tasksync-header-font-size-sm);
     color: var(--vscode-inputValidation-errorForeground, #f48771);
     display: flex;
     align-items: center;
@@ -3881,7 +3886,7 @@ button#send-btn:disabled {
 }
 
 .simple-alert-title {
-    font-size: var(--tasksync-header-font-size);
+    font-size: var(--tasksync-header-font-size-sm);
     color: var(--vscode-foreground);
     display: flex;
     align-items: center;
@@ -3982,7 +3987,7 @@ button#send-btn:disabled {
     max-height: 120px;
     resize: vertical;
     font-family: var(--vscode-font-family);
-    font-size: var(--tasksync-input-font-size);
+    font-size: var(--tasksync-input-font-size-sm);
     padding: 6px 8px;
     border: 1px solid var(--vscode-input-border, var(--vscode-widget-border));
     border-radius: 4px;
@@ -4085,7 +4090,7 @@ button#send-btn:disabled {
 }
 
 .session-thread-title {
-    font-size: var(--tasksync-header-font-size);
+    font-size: var(--tasksync-header-font-size-sm);
     font-weight: 600;
     color: var(--vscode-foreground);
     white-space: nowrap;
@@ -4258,7 +4263,7 @@ button#send-btn:disabled {
 }
 
 .inbox-item-title {
-    font-size: var(--tasksync-header-font-size);
+    font-size: var(--tasksync-header-font-size-sm);
     font-weight: 600;
     color: var(--vscode-foreground);
     white-space: nowrap;

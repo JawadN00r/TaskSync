@@ -242,12 +242,26 @@
           "default": true,
           "description": "Show interactive approval and choice buttons for Yes/No questions and multiple choice options."
         },
-        "tasksync.fontSizePx": {
+        "tasksync.fontSize": {
           "type": "number",
           "default": 0,
           "minimum": 0,
           "scope": "window",
-          "description": "Base font size in px for the TaskSync UI. Set to 0 to keep deriving from the current VS Code font size."
+          "description": "Main text font size for the TaskSync UI, in px. Set to 0 to keep deriving from the current VS Code font size."
+        },
+        "tasksync.headerFontSize": {
+          "type": "number",
+          "default": 0,
+          "minimum": 0,
+          "scope": "window",
+          "description": "Header font size for the TaskSync UI, in px. Set to 0 to keep the default header scale."
+        },
+        "tasksync.inputFontSize": {
+          "type": "number",
+          "default": 0,
+          "minimum": 0,
+          "scope": "window",
+          "description": "Chat input font size for the TaskSync UI, in px. Set to 0 to keep the default input scale."
         },
         "tasksync.agentOrchestration": {
           "type": "boolean",

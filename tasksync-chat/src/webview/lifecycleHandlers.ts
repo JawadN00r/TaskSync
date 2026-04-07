@@ -45,7 +45,9 @@ export async function preloadBodyTemplate(
 export function getHtmlContent(
 	extensionUri: vscode.Uri,
 	webview: vscode.Webview,
-	fontSizePx: number,
+	fontSize: number,
+	headerFontSize: number,
+	inputFontSize: number,
 ): string {
 	const styleUri = webview.asWebviewUri(
 		vscode.Uri.joinPath(extensionUri, "media", "main.css"),
@@ -101,17 +103,34 @@ export function getHtmlContent(
 		.replace(/\{\{LOGO_URI\}\}/g, logoUri.toString())
 		.replace(/\{\{TITLE\}\}/g, "Let's build")
 		.replace(/\{\{SUBTITLE\}\}/g, "Sync your tasks, automate your workflow");
-	const normalizedFontSizePx =
-		typeof fontSizePx === "number" && Number.isFinite(fontSizePx)
-			? Math.max(0, Math.floor(fontSizePx))
+	const normalizedFontSize =
+		typeof fontSize === "number" && Number.isFinite(fontSize)
+			? Math.max(0, Math.floor(fontSize))
 			: 0;
-	const htmlStyle =
-		normalizedFontSizePx > 0
-			? ` style="--tasksync-configured-font-size: ${normalizedFontSizePx}px;"`
-			: "";
+	const normalizedHeaderFontSize =
+		typeof headerFontSize === "number" && Number.isFinite(headerFontSize)
+			? Math.max(0, Math.floor(headerFontSize))
+			: 0;
+	const normalizedInputFontSize =
+		typeof inputFontSize === "number" && Number.isFinite(inputFontSize)
+			? Math.max(0, Math.floor(inputFontSize))
+			: 0;
+	const htmlStyle = [
+		normalizedFontSize > 0
+			? `--tasksync-font-size-base: ${normalizedFontSize}px;`
+			: "",
+		normalizedHeaderFontSize > 0
+			? `--tasksync-header-font-size: ${normalizedHeaderFontSize}px;`
+			: "",
+		normalizedInputFontSize > 0
+			? `--tasksync-input-font-size: ${normalizedInputFontSize}px;`
+			: "",
+	]
+		.filter(Boolean)
+		.join(" ");
 
 	return `<!DOCTYPE html>
-<html lang="en"${htmlStyle}>
+<html lang="en"${htmlStyle ? ` style="${htmlStyle}"` : ""}>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -146,7 +165,9 @@ export function setupWebviewView(p: P, webviewView: vscode.WebviewView): void {
 	webviewView.webview.html = getHtmlContent(
 		p._extensionUri,
 		webviewView.webview,
-		p._fontSizePx,
+		p._fontSize,
+		p._headerFontSize,
+		p._inputFontSize,
 	);
 
 	// Restore session timer display if timer is already running

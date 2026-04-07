@@ -154,12 +154,44 @@ export function readResponseTimeoutMinutes(
 	return normalizeResponseTimeout(configuredTimeout);
 }
 
-export function normalizeFontSizePx(value: unknown): number {
+function getExplicitConfigValue<T>(
+	settings: vscodeTypes.WorkspaceConfiguration,
+	key: string,
+): T | undefined {
+	const inspected = settings.inspect<T>(key);
+	if (!inspected) {
+		return undefined;
+	}
+
+	return (
+		inspected.workspaceFolderLanguageValue ??
+		inspected.workspaceFolderValue ??
+		inspected.workspaceLanguageValue ??
+		inspected.workspaceValue ??
+		inspected.globalLanguageValue ??
+		inspected.globalValue
+	);
+}
+
+export function normalizeFontSize(value: unknown): number {
 	if (typeof value !== "number" || !Number.isFinite(value)) {
 		return 0;
 	}
 
 	return Math.max(0, Math.floor(value));
+}
+
+export function readFontSize(
+	key: "fontSize" | "headerFontSize" | "inputFontSize",
+	config?: vscodeTypes.WorkspaceConfiguration,
+): number {
+	const settings = config ?? vscode.workspace.getConfiguration(CONFIG_SECTION);
+	const configuredFontSize = getExplicitConfigValue<unknown>(settings, key);
+	if (configuredFontSize !== undefined) {
+		return normalizeFontSize(configuredFontSize);
+	}
+
+	return normalizeFontSize(settings.get<number>(key, 0));
 }
 
 export function normalizeRemoteMaxDevices(value: unknown): number {
@@ -268,7 +300,9 @@ export function loadSettings(p: P, options: LoadSettingsOptions = {}): void {
 			)
 		: DEFAULT_SESSION_WARNING_HOURS;
 	p._sendWithCtrlEnter = config.get<boolean>("sendWithCtrlEnter", false);
-	p._fontSizePx = normalizeFontSizePx(config.get<number>("fontSizePx", 0));
+	p._fontSize = readFontSize("fontSize", config);
+	p._headerFontSize = readFontSize("headerFontSize", config);
+	p._inputFontSize = readFontSize("inputFontSize", config);
 	if (
 		!options.skipSingleSessionCollapse &&
 		!p._agentOrchestrationEnabled &&
@@ -306,7 +340,9 @@ export function buildSettingsPayload(p: P): {
 	autoAppendText: string;
 	alwaysAppendReminder: boolean;
 	sendWithCtrlEnter: boolean;
-	fontSizePx: number;
+	fontSize: number;
+	headerFontSize: number;
+	inputFontSize: number;
 	autopilotEnabled: boolean;
 	autopilotText: string;
 	autopilotPrompts: string[];
@@ -329,7 +365,9 @@ export function buildSettingsPayload(p: P): {
 		autoAppendText: p._autoAppendText,
 		alwaysAppendReminder: p._alwaysAppendReminder,
 		sendWithCtrlEnter: p._sendWithCtrlEnter,
-		fontSizePx: normalizeFontSizePx(p._fontSizePx),
+		fontSize: normalizeFontSize(p._fontSize),
+		headerFontSize: normalizeFontSize(p._headerFontSize),
+		inputFontSize: normalizeFontSize(p._inputFontSize),
 		autopilotEnabled: p._autopilotEnabled,
 		autopilotText: p._autopilotText,
 		autopilotPrompts: p._autopilotPrompts,

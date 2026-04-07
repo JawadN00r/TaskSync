@@ -16,10 +16,12 @@
 :root {
     --queue-list-max-height: 120px;
     --textarea-max-height: 120px;
-    --tasksync-configured-font-size: var(--vscode-font-size);
-    --tasksync-font-size-xs: var(--tasksync-configured-font-size);
-    --tasksync-font-size-sm: calc(var(--tasksync-configured-font-size) + 1px);
-    --tasksync-font-size-md: calc(var(--tasksync-configured-font-size) + 2px);
+    --tasksync-font-size-base: var(--vscode-font-size);
+    --tasksync-header-font-size: calc(var(--tasksync-font-size-base) + 7px);
+    --tasksync-input-font-size: calc(var(--tasksync-font-size-base) + 2px);
+    --tasksync-font-size-xs: var(--tasksync-font-size-base);
+    --tasksync-font-size-sm: calc(var(--tasksync-font-size-base) + 1px);
+    --tasksync-font-size-md: calc(var(--tasksync-font-size-base) + 2px);
 }
 
 html,
@@ -32,7 +34,7 @@ body {
 
 body {
     font-family: var(--vscode-font-family);
-    font-size: var(--tasksync-font-size-md);
+    font-size: var(--tasksync-font-size-base);
     font-weight: var(--vscode-font-weight);
     color: var(--vscode-foreground);
     background-color: var(--vscode-sideBar-background);
@@ -546,7 +548,7 @@ body {
 }
 
 .welcome-title {
-    font-size: 20px;
+    font-size: var(--tasksync-header-font-size);
     font-weight: 600;
     color: var(--vscode-foreground);
     margin: 0;
@@ -655,13 +657,13 @@ body {
 }
 
 .sessions-panel-title {
-    font-size: 12px;
+    font-size: var(--tasksync-font-size-xs);
     font-weight: 600;
     color: var(--vscode-foreground);
 }
 
 .sessions-panel-subtitle {
-    font-size: 11px;
+    font-size: var(--tasksync-font-size-xs);
     color: var(--vscode-descriptionForeground);
 }
 
@@ -1257,7 +1259,7 @@ body:not(.remote-mode) .changes-modal-overlay {
 }
 
 .changes-title {
-    font-size: 14px;
+    font-size: var(--tasksync-header-font-size);
     font-weight: 600;
     color: var(--vscode-foreground);
 }
@@ -1341,7 +1343,8 @@ body:not(.remote-mode) .changes-modal-overlay {
     border-radius: 6px;
     background: var(--vscode-input-background);
     color: var(--vscode-input-foreground);
-    font: inherit;
+    font-family: var(--vscode-font-family);
+    font-size: var(--tasksync-input-font-size);
 }
 
 .changes-commit-input::placeholder {
@@ -2028,7 +2031,7 @@ body:not(.remote-mode) .changes-modal-overlay {
     border-radius: 4px;
     color: var(--vscode-input-foreground);
     font-family: var(--vscode-font-family);
-    font-size: var(--vscode-font-size);
+    font-size: var(--tasksync-input-font-size);
     padding: 4px 8px;
     outline: none;
     width: 100%;
@@ -2278,7 +2281,7 @@ textarea#chat-input {
     border: none;
     resize: none;
     font-family: var(--vscode-font-family);
-    font-size: var(--tasksync-font-size-md);
+    font-size: var(--tasksync-input-font-size);
     padding: 4px 0;
     background: transparent;
     outline: none;
@@ -2303,7 +2306,7 @@ textarea#chat-input::-webkit-scrollbar {
 textarea#chat-input::placeholder {
     color: var(--vscode-input-placeholderForeground);
     opacity: 1;
-    font-size: var(--tasksync-font-size-xs);
+    font-size: var(--tasksync-input-font-size);
     /* Ensure placeholder is visible even with transparent text color */
 }
 
@@ -2491,7 +2494,7 @@ button#send-btn:disabled {
     }
 
     .welcome-title {
-        font-size: 20px;
+        font-size: var(--tasksync-header-font-size);
     }
 }
 
@@ -2539,7 +2542,7 @@ button#send-btn:disabled {
 }
 
 .history-modal-title {
-    font-size: 13px;
+    font-size: var(--tasksync-header-font-size);
     font-weight: 600;
     color: var(--vscode-foreground);
 }
@@ -3235,7 +3238,7 @@ button#send-btn:disabled {
 
 .settings-modal-title {
     flex: 1;
-    font-size: 13px;
+    font-size: var(--tasksync-header-font-size);
     font-weight: 600;
     color: var(--vscode-foreground);
 }
@@ -3709,7 +3712,7 @@ button#send-btn:disabled {
     background-color: var(--vscode-editor-background);
     color: var(--vscode-input-foreground);
     font-family: var(--vscode-font-family);
-    font-size: 13px;
+    font-size: var(--tasksync-input-font-size);
 }
 
 .form-input:focus {
@@ -3721,6 +3724,7 @@ button#send-btn:disabled {
     resize: vertical;
     min-height: 60px;
     max-height: 150px;
+    font-size: var(--tasksync-input-font-size);
 }
 
 /* Select dropdown styling */
@@ -3830,6 +3834,7 @@ button#send-btn:disabled {
 }
 
 .timeout-warning-title {
+    font-size: var(--tasksync-header-font-size);
     color: var(--vscode-inputValidation-errorForeground, #f48771);
     display: flex;
     align-items: center;
@@ -3876,6 +3881,7 @@ button#send-btn:disabled {
 }
 
 .simple-alert-title {
+    font-size: var(--tasksync-header-font-size);
     color: var(--vscode-foreground);
     display: flex;
     align-items: center;
@@ -3976,7 +3982,7 @@ button#send-btn:disabled {
     max-height: 120px;
     resize: vertical;
     font-family: var(--vscode-font-family);
-    font-size: 12px;
+    font-size: var(--tasksync-input-font-size);
     padding: 6px 8px;
     border: 1px solid var(--vscode-input-border, var(--vscode-widget-border));
     border-radius: 4px;
@@ -4079,7 +4085,7 @@ button#send-btn:disabled {
 }
 
 .session-thread-title {
-    font-size: 13px;
+    font-size: var(--tasksync-header-font-size);
     font-weight: 600;
     color: var(--vscode-foreground);
     white-space: nowrap;
@@ -4205,7 +4211,7 @@ button#send-btn:disabled {
 }
 
 .inbox-title {
-    font-size: 12px;
+    font-size: var(--tasksync-font-size-xs);
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.05em;
@@ -4252,7 +4258,7 @@ button#send-btn:disabled {
 }
 
 .inbox-item-title {
-    font-size: 13px;
+    font-size: var(--tasksync-header-font-size);
     font-weight: 600;
     color: var(--vscode-foreground);
     white-space: nowrap;

@@ -692,19 +692,36 @@ function clearRemoteSessionState(statusMessage) {
 
 // ——— Server state application (SSOT) ———
 
-function applyConfiguredFontSizePx() {
+function applyConfiguredFontSize() {
 	if (!document.documentElement) return;
-	if (fontSizePx > 0) {
+	if (fontSize > 0) {
 		document.documentElement.style.setProperty(
-			"--tasksync-configured-font-size",
-			`${fontSizePx}px`,
+			"--tasksync-font-size-base",
+			`${fontSize}px`,
 		);
-		return;
+	} else {
+		document.documentElement.style.removeProperty("--tasksync-font-size-base");
 	}
 
-	document.documentElement.style.removeProperty(
-		"--tasksync-configured-font-size",
-	);
+	if (headerFontSize > 0) {
+		document.documentElement.style.setProperty(
+			"--tasksync-header-font-size",
+			`${headerFontSize}px`,
+		);
+	} else {
+		document.documentElement.style.removeProperty(
+			"--tasksync-header-font-size",
+		);
+	}
+
+	if (inputFontSize > 0) {
+		document.documentElement.style.setProperty(
+			"--tasksync-input-font-size",
+			`${inputFontSize}px`,
+		);
+	} else {
+		document.documentElement.style.removeProperty("--tasksync-input-font-size");
+	}
 }
 
 // Apply settings data from either settingsChanged broadcast or getState response (SSOT)
@@ -740,10 +757,22 @@ function applySettingsData(s) {
 		interactiveApprovalEnabled = s.interactiveApprovalEnabled;
 	if (s.sendWithCtrlEnter !== undefined)
 		sendWithCtrlEnter = s.sendWithCtrlEnter;
-	if (s.fontSizePx !== undefined) {
-		fontSizePx =
-			typeof s.fontSizePx === "number" && Number.isFinite(s.fontSizePx)
-				? Math.max(0, Math.floor(s.fontSizePx))
+	if (s.fontSize !== undefined) {
+		fontSize =
+			typeof s.fontSize === "number" && Number.isFinite(s.fontSize)
+				? Math.max(0, Math.floor(s.fontSize))
+				: 0;
+	}
+	if (s.headerFontSize !== undefined) {
+		headerFontSize =
+			typeof s.headerFontSize === "number" && Number.isFinite(s.headerFontSize)
+				? Math.max(0, Math.floor(s.headerFontSize))
+				: 0;
+	}
+	if (s.inputFontSize !== undefined) {
+		inputFontSize =
+			typeof s.inputFontSize === "number" && Number.isFinite(s.inputFontSize)
+				? Math.max(0, Math.floor(s.inputFontSize))
 				: 0;
 	}
 	if (s.sessionWarningHours !== undefined)
@@ -877,7 +906,7 @@ function updatePendingUI() {
 
 /** Refresh all settings toggle/input UI from current state variables. */
 function applySettingsToUI() {
-	applyConfiguredFontSizePx();
+	applyConfiguredFontSize();
 	updateSoundToggleUI();
 	updateInteractiveApprovalToggleUI();
 	updateAgentOrchestrationToggleUI();

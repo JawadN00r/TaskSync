@@ -84,10 +84,20 @@ function handleExtensionMessage(event) {
 					: "";
 			alwaysAppendReminder = message.alwaysAppendReminder === true;
 			sendWithCtrlEnter = message.sendWithCtrlEnter === true;
-			fontSizePx =
-				typeof message.fontSizePx === "number" &&
-				Number.isFinite(message.fontSizePx)
-					? Math.max(0, Math.floor(message.fontSizePx))
+			fontSize =
+				typeof message.fontSize === "number" &&
+				Number.isFinite(message.fontSize)
+					? Math.max(0, Math.floor(message.fontSize))
+					: 0;
+			headerFontSize =
+				typeof message.headerFontSize === "number" &&
+				Number.isFinite(message.headerFontSize)
+					? Math.max(0, Math.floor(message.headerFontSize))
+					: 0;
+			inputFontSize =
+				typeof message.inputFontSize === "number" &&
+				Number.isFinite(message.inputFontSize)
+					? Math.max(0, Math.floor(message.inputFontSize))
 					: 0;
 			autopilotEnabled = message.autopilotEnabled === true;
 			autopilotText =
@@ -122,7 +132,7 @@ function handleExtensionMessage(event) {
 				typeof message.humanLikeDelayMax === "number"
 					? message.humanLikeDelayMax
 					: DEFAULT_HUMAN_DELAY_MAX;
-			applyConfiguredFontSizePx();
+			applyConfiguredFontSize();
 			updateSoundToggleUI();
 			updateInteractiveApprovalToggleUI();
 			updateAgentOrchestrationToggleUI();

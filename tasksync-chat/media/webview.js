@@ -744,19 +744,36 @@ function clearRemoteSessionState(statusMessage) {
 
 // ——— Server state application (SSOT) ———
 
-function applyConfiguredFontSizePx() {
+function applyConfiguredFontSize() {
 	if (!document.documentElement) return;
-	if (fontSizePx > 0) {
+	if (fontSize > 0) {
 		document.documentElement.style.setProperty(
-			"--tasksync-configured-font-size",
-			`${fontSizePx}px`,
+			"--tasksync-font-size-base",
+			`${fontSize}px`,
 		);
-		return;
+	} else {
+		document.documentElement.style.removeProperty("--tasksync-font-size-base");
 	}
 
-	document.documentElement.style.removeProperty(
-		"--tasksync-configured-font-size",
-	);
+	if (headerFontSize > 0) {
+		document.documentElement.style.setProperty(
+			"--tasksync-header-font-size",
+			`${headerFontSize}px`,
+		);
+	} else {
+		document.documentElement.style.removeProperty(
+			"--tasksync-header-font-size",
+		);
+	}
+
+	if (inputFontSize > 0) {
+		document.documentElement.style.setProperty(
+			"--tasksync-input-font-size",
+			`${inputFontSize}px`,
+		);
+	} else {
+		document.documentElement.style.removeProperty("--tasksync-input-font-size");
+	}
 }
 
 // Apply settings data from either settingsChanged broadcast or getState response (SSOT)
@@ -792,10 +809,22 @@ function applySettingsData(s) {
 		interactiveApprovalEnabled = s.interactiveApprovalEnabled;
 	if (s.sendWithCtrlEnter !== undefined)
 		sendWithCtrlEnter = s.sendWithCtrlEnter;
-	if (s.fontSizePx !== undefined) {
-		fontSizePx =
-			typeof s.fontSizePx === "number" && Number.isFinite(s.fontSizePx)
-				? Math.max(0, Math.floor(s.fontSizePx))
+	if (s.fontSize !== undefined) {
+		fontSize =
+			typeof s.fontSize === "number" && Number.isFinite(s.fontSize)
+				? Math.max(0, Math.floor(s.fontSize))
+				: 0;
+	}
+	if (s.headerFontSize !== undefined) {
+		headerFontSize =
+			typeof s.headerFontSize === "number" && Number.isFinite(s.headerFontSize)
+				? Math.max(0, Math.floor(s.headerFontSize))
+				: 0;
+	}
+	if (s.inputFontSize !== undefined) {
+		inputFontSize =
+			typeof s.inputFontSize === "number" && Number.isFinite(s.inputFontSize)
+				? Math.max(0, Math.floor(s.inputFontSize))
 				: 0;
 	}
 	if (s.sessionWarningHours !== undefined)
@@ -929,7 +958,7 @@ function updatePendingUI() {
 
 /** Refresh all settings toggle/input UI from current state variables. */
 function applySettingsToUI() {
-	applyConfiguredFontSizePx();
+	applyConfiguredFontSize();
 	updateSoundToggleUI();
 	updateInteractiveApprovalToggleUI();
 	updateAgentOrchestrationToggleUI();
@@ -1073,7 +1102,9 @@ let responseTimeout = RESPONSE_TIMEOUT_DEFAULT;
 let sessionWarningHours = DEFAULT_SESSION_WARNING_HOURS;
 let maxConsecutiveAutoResponses = DEFAULT_MAX_AUTO_RESPONSES;
 let remoteMaxDevices = DEFAULT_REMOTE_MAX_DEVICES;
-let fontSizePx = 0;
+let fontSize = 0;
+let headerFontSize = 0;
+let inputFontSize = 0;
 
 // Human-like delay: random jitter simulates natural reading/typing time
 let humanLikeDelayEnabled = true;
@@ -4005,10 +4036,20 @@ function handleExtensionMessage(event) {
 					: "";
 			alwaysAppendReminder = message.alwaysAppendReminder === true;
 			sendWithCtrlEnter = message.sendWithCtrlEnter === true;
-			fontSizePx =
-				typeof message.fontSizePx === "number" &&
-				Number.isFinite(message.fontSizePx)
-					? Math.max(0, Math.floor(message.fontSizePx))
+			fontSize =
+				typeof message.fontSize === "number" &&
+				Number.isFinite(message.fontSize)
+					? Math.max(0, Math.floor(message.fontSize))
+					: 0;
+			headerFontSize =
+				typeof message.headerFontSize === "number" &&
+				Number.isFinite(message.headerFontSize)
+					? Math.max(0, Math.floor(message.headerFontSize))
+					: 0;
+			inputFontSize =
+				typeof message.inputFontSize === "number" &&
+				Number.isFinite(message.inputFontSize)
+					? Math.max(0, Math.floor(message.inputFontSize))
 					: 0;
 			autopilotEnabled = message.autopilotEnabled === true;
 			autopilotText =
@@ -4043,7 +4084,7 @@ function handleExtensionMessage(event) {
 				typeof message.humanLikeDelayMax === "number"
 					? message.humanLikeDelayMax
 					: DEFAULT_HUMAN_DELAY_MAX;
-			applyConfiguredFontSizePx();
+			applyConfiguredFontSize();
 			updateSoundToggleUI();
 			updateInteractiveApprovalToggleUI();
 			updateAgentOrchestrationToggleUI();

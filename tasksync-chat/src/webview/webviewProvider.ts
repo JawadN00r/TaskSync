@@ -191,7 +191,9 @@ export class TaskSyncWebviewProvider
 
 	// Send behavior: false => Enter, true => Ctrl/Cmd+Enter
 	_sendWithCtrlEnter: boolean = false;
-	_fontSizePx: number = 0;
+	_fontSize: number = 0;
+	_headerFontSize: number = 0;
+	_inputFontSize: number = 0;
 
 	// Flag to prevent config reload during our own updates (avoids race condition)
 	_isUpdatingConfig: boolean = false;
@@ -274,7 +276,9 @@ export class TaskSyncWebviewProvider
 			e.affectsConfiguration(`${CONFIG_SECTION}.alwaysAppendAskUserReminder`) ||
 			e.affectsConfiguration(`${CONFIG_SECTION}.reusablePrompts`) ||
 			e.affectsConfiguration(`${CONFIG_SECTION}.responseTimeout`) ||
-			e.affectsConfiguration(`${CONFIG_SECTION}.fontSizePx`) ||
+			e.affectsConfiguration(`${CONFIG_SECTION}.fontSize`) ||
+			e.affectsConfiguration(`${CONFIG_SECTION}.headerFontSize`) ||
+			e.affectsConfiguration(`${CONFIG_SECTION}.inputFontSize`) ||
 			e.affectsConfiguration(`${CONFIG_SECTION}.remoteMaxDevices`) ||
 			e.affectsConfiguration(`${CONFIG_SECTION}.sessionWarningHours`) ||
 			e.affectsConfiguration(`${CONFIG_SECTION}.maxConsecutiveAutoResponses`) ||

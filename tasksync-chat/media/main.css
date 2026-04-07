@@ -16,6 +16,9 @@
 :root {
     --queue-list-max-height: 120px;
     --textarea-max-height: 120px;
+    --tasksync-font-size-xs: var(--vscode-font-size);
+    --tasksync-font-size-sm: calc(var(--vscode-font-size) + 1px);
+    --tasksync-font-size-md: calc(var(--vscode-font-size) + 2px);
 }
 
 html,
@@ -28,7 +31,7 @@ body {
 
 body {
     font-family: var(--vscode-font-family);
-    font-size: var(--vscode-font-size);
+    font-size: var(--tasksync-font-size-md);
     font-weight: var(--vscode-font-weight);
     color: var(--vscode-foreground);
     background-color: var(--vscode-sideBar-background);
@@ -552,7 +555,7 @@ body {
 .welcome-subtitle {
     margin: 0 0 4px 0;
     color: var(--vscode-descriptionForeground);
-    font-size: 12px;
+    font-size: var(--tasksync-font-size-sm);
 }
 
 .welcome-cards {
@@ -606,20 +609,20 @@ body {
 }
 
 .welcome-card-title {
-    font-size: 13px;
+    font-size: var(--tasksync-font-size-sm);
     font-weight: 600;
     color: var(--vscode-foreground);
 }
 
 .welcome-card-desc {
-    font-size: 11px;
+    font-size: var(--tasksync-font-size-xs);
     color: var(--vscode-descriptionForeground);
     margin: 0;
     line-height: 1.4;
 }
 
 .welcome-autopilot-info {
-    font-size: 11px;
+    font-size: var(--tasksync-font-size-xs);
     color: var(--vscode-descriptionForeground);
     width: 100%;
     max-width: 520px;
@@ -778,7 +781,7 @@ body {
 }
 
 .tool-call-title {
-    font-size: 11px;
+    font-size: var(--tasksync-font-size-xs);
     font-weight: 400;
     color: var(--vscode-foreground);
     overflow: hidden;
@@ -822,7 +825,7 @@ body {
 }
 
 .tool-call-ai-response {
-    font-size: 11px;
+    font-size: var(--tasksync-font-size-xs);
     line-height: 1.35;
     color: var(--vscode-foreground);
     margin-bottom: 6px;
@@ -1050,7 +1053,7 @@ body {
 }
 
 .tool-call-user-response {
-    font-size: 11px;
+    font-size: var(--tasksync-font-size-xs);
     line-height: 1.35;
     color: var(--vscode-foreground);
 }
@@ -1072,7 +1075,7 @@ body {
 /* Pending AI Summary - Rendered markdown content from summary field */
 .pending-ai-summary {
     padding: 10px 12px;
-    font-size: 13px;
+    font-size: var(--tasksync-font-size-md);
     line-height: 1.4;
     color: var(--vscode-foreground);
     word-wrap: break-word;
@@ -1083,7 +1086,7 @@ body {
 /* Pending AI Question - Plain text bubble (no border) */
 .pending-ai-question {
     padding: 10px 12px;
-    font-size: 13px;
+    font-size: var(--tasksync-font-size-md);
     line-height: 1.4;
     color: var(--vscode-foreground);
     word-wrap: break-word;
@@ -1151,7 +1154,7 @@ body {
     display: flex;
     align-items: center;
     gap: 12px;
-    font-size: 13px;
+    font-size: var(--tasksync-font-size-sm);
     color: var(--vscode-descriptionForeground);
 }
 
@@ -1164,7 +1167,7 @@ body {
     border-radius: 4px;
     background: var(--vscode-button-background);
     color: var(--vscode-button-foreground);
-    font-size: 12px;
+    font-size: var(--tasksync-font-size-xs);
     cursor: pointer;
     white-space: nowrap;
 }
@@ -2274,7 +2277,7 @@ textarea#chat-input {
     border: none;
     resize: none;
     font-family: var(--vscode-font-family);
-    font-size: var(--vscode-font-size);
+    font-size: var(--tasksync-font-size-md);
     padding: 4px 0;
     background: transparent;
     outline: none;
@@ -2299,7 +2302,7 @@ textarea#chat-input::-webkit-scrollbar {
 textarea#chat-input::placeholder {
     color: var(--vscode-input-placeholderForeground);
     opacity: 1;
-    font-size: 11px;
+    font-size: var(--tasksync-font-size-xs);
     /* Ensure placeholder is visible even with transparent text color */
 }
 
@@ -2349,7 +2352,7 @@ button#send-btn .codicon {
 }
 
 .autopilot-label {
-    font-size: 11px;
+    font-size: var(--tasksync-font-size-xs);
     color: var(--vscode-descriptionForeground);
     font-weight: 500;
     user-select: none;
@@ -2400,7 +2403,7 @@ button#send-btn .codicon {
     border-radius: 4px;
     background: transparent;
     color: var(--vscode-descriptionForeground);
-    font-size: 11px;
+    font-size: var(--tasksync-font-size-xs);
     cursor: pointer;
     transition: all 0.15s ease;
 }
@@ -2828,7 +2831,7 @@ button#send-btn:disabled {
 .approval-btn {
     padding: 4px 10px;
     border-radius: 4px;
-    font-size: 12px;
+    font-size: var(--tasksync-font-size-xs);
     font-weight: 500;
     cursor: pointer;
     transition: all 0.15s ease;
@@ -2897,7 +2900,7 @@ button#send-btn:disabled {
 
 /* Label on left side */
 .choices-label {
-    font-size: 12px;
+    font-size: var(--tasksync-font-size-xs);
     color: var(--vscode-foreground);
     font-weight: 400;
     flex-shrink: 0;
@@ -2917,7 +2920,7 @@ button#send-btn:disabled {
 .choice-btn {
     padding: 4px 12px;
     border-radius: 4px;
-    font-size: 12px;
+    font-size: var(--tasksync-font-size-xs);
     font-weight: 500;
     cursor: pointer;
     transition: all 0.15s ease;

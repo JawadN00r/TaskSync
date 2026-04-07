@@ -692,6 +692,21 @@ function clearRemoteSessionState(statusMessage) {
 
 // ——— Server state application (SSOT) ———
 
+function applyConfiguredFontSizePx() {
+	if (!document.documentElement) return;
+	if (fontSizePx > 0) {
+		document.documentElement.style.setProperty(
+			"--tasksync-configured-font-size",
+			`${fontSizePx}px`,
+		);
+		return;
+	}
+
+	document.documentElement.style.removeProperty(
+		"--tasksync-configured-font-size",
+	);
+}
+
 // Apply settings data from either settingsChanged broadcast or getState response (SSOT)
 function applySettingsData(s) {
 	if (s.autopilotEnabled !== undefined) autopilotEnabled = s.autopilotEnabled;
@@ -725,6 +740,12 @@ function applySettingsData(s) {
 		interactiveApprovalEnabled = s.interactiveApprovalEnabled;
 	if (s.sendWithCtrlEnter !== undefined)
 		sendWithCtrlEnter = s.sendWithCtrlEnter;
+	if (s.fontSizePx !== undefined) {
+		fontSizePx =
+			typeof s.fontSizePx === "number" && Number.isFinite(s.fontSizePx)
+				? Math.max(0, Math.floor(s.fontSizePx))
+				: 0;
+	}
 	if (s.sessionWarningHours !== undefined)
 		sessionWarningHours = s.sessionWarningHours;
 	if (s.maxConsecutiveAutoResponses !== undefined)
@@ -856,6 +877,7 @@ function updatePendingUI() {
 
 /** Refresh all settings toggle/input UI from current state variables. */
 function applySettingsToUI() {
+	applyConfiguredFontSizePx();
 	updateSoundToggleUI();
 	updateInteractiveApprovalToggleUI();
 	updateAgentOrchestrationToggleUI();

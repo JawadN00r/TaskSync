@@ -121,6 +121,7 @@ let responseTimeout = RESPONSE_TIMEOUT_DEFAULT;
 let sessionWarningHours = DEFAULT_SESSION_WARNING_HOURS;
 let maxConsecutiveAutoResponses = DEFAULT_MAX_AUTO_RESPONSES;
 let remoteMaxDevices = DEFAULT_REMOTE_MAX_DEVICES;
+let fontSizePx = 0;
 
 // Human-like delay: random jitter simulates natural reading/typing time
 let humanLikeDelayEnabled = true;

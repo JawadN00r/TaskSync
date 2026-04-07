@@ -45,6 +45,7 @@ export async function preloadBodyTemplate(
 export function getHtmlContent(
 	extensionUri: vscode.Uri,
 	webview: vscode.Webview,
+	fontSizePx: number,
 ): string {
 	const styleUri = webview.asWebviewUri(
 		vscode.Uri.joinPath(extensionUri, "media", "main.css"),
@@ -100,9 +101,17 @@ export function getHtmlContent(
 		.replace(/\{\{LOGO_URI\}\}/g, logoUri.toString())
 		.replace(/\{\{TITLE\}\}/g, "Let's build")
 		.replace(/\{\{SUBTITLE\}\}/g, "Sync your tasks, automate your workflow");
+	const normalizedFontSizePx =
+		typeof fontSizePx === "number" && Number.isFinite(fontSizePx)
+			? Math.max(0, Math.floor(fontSizePx))
+			: 0;
+	const htmlStyle =
+		normalizedFontSizePx > 0
+			? ` style="--tasksync-configured-font-size: ${normalizedFontSizePx}px;"`
+			: "";
 
 	return `<!DOCTYPE html>
-<html lang="en">
+<html lang="en"${htmlStyle}>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -137,6 +146,7 @@ export function setupWebviewView(p: P, webviewView: vscode.WebviewView): void {
 	webviewView.webview.html = getHtmlContent(
 		p._extensionUri,
 		webviewView.webview,
+		p._fontSizePx,
 	);
 
 	// Restore session timer display if timer is already running

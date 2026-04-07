@@ -242,6 +242,13 @@
           "default": true,
           "description": "Show interactive approval and choice buttons for Yes/No questions and multiple choice options."
         },
+        "tasksync.fontSizePx": {
+          "type": "number",
+          "default": 0,
+          "minimum": 0,
+          "scope": "window",
+          "description": "Base font size in px for the TaskSync UI. Set to 0 to keep deriving from the current VS Code font size."
+        },
         "tasksync.agentOrchestration": {
           "type": "boolean",
           "default": true,

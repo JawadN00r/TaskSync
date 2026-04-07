@@ -156,6 +156,7 @@ export type ToWebviewMessage =
 			autopilotEnabled: boolean;
 			autopilotText: string;
 			autopilotPrompts: string[];
+			fontSizePx: number;
 			reusablePrompts: ReusablePrompt[];
 			responseTimeout: number;
 			sessionWarningHours: number;

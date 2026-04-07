@@ -154,6 +154,14 @@ export function readResponseTimeoutMinutes(
 	return normalizeResponseTimeout(configuredTimeout);
 }
 
+export function normalizeFontSizePx(value: unknown): number {
+	if (typeof value !== "number" || !Number.isFinite(value)) {
+		return 0;
+	}
+
+	return Math.max(0, Math.floor(value));
+}
+
 export function normalizeRemoteMaxDevices(value: unknown): number {
 	let parsedValue: number;
 
@@ -260,6 +268,7 @@ export function loadSettings(p: P, options: LoadSettingsOptions = {}): void {
 			)
 		: DEFAULT_SESSION_WARNING_HOURS;
 	p._sendWithCtrlEnter = config.get<boolean>("sendWithCtrlEnter", false);
+	p._fontSizePx = normalizeFontSizePx(config.get<number>("fontSizePx", 0));
 	if (
 		!options.skipSingleSessionCollapse &&
 		!p._agentOrchestrationEnabled &&
@@ -297,6 +306,7 @@ export function buildSettingsPayload(p: P): {
 	autoAppendText: string;
 	alwaysAppendReminder: boolean;
 	sendWithCtrlEnter: boolean;
+	fontSizePx: number;
 	autopilotEnabled: boolean;
 	autopilotText: string;
 	autopilotPrompts: string[];
@@ -319,6 +329,7 @@ export function buildSettingsPayload(p: P): {
 		autoAppendText: p._autoAppendText,
 		alwaysAppendReminder: p._alwaysAppendReminder,
 		sendWithCtrlEnter: p._sendWithCtrlEnter,
+		fontSizePx: normalizeFontSizePx(p._fontSizePx),
 		autopilotEnabled: p._autopilotEnabled,
 		autopilotText: p._autopilotText,
 		autopilotPrompts: p._autopilotPrompts,

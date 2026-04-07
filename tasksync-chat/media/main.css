@@ -16,9 +16,10 @@
 :root {
     --queue-list-max-height: 120px;
     --textarea-max-height: 120px;
-    --tasksync-font-size-xs: var(--vscode-font-size);
-    --tasksync-font-size-sm: calc(var(--vscode-font-size) + 1px);
-    --tasksync-font-size-md: calc(var(--vscode-font-size) + 2px);
+    --tasksync-configured-font-size: var(--vscode-font-size);
+    --tasksync-font-size-xs: var(--tasksync-configured-font-size);
+    --tasksync-font-size-sm: calc(var(--tasksync-configured-font-size) + 1px);
+    --tasksync-font-size-md: calc(var(--tasksync-configured-font-size) + 2px);
 }
 
 html,

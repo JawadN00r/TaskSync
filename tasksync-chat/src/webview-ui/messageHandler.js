@@ -84,6 +84,11 @@ function handleExtensionMessage(event) {
 					: "";
 			alwaysAppendReminder = message.alwaysAppendReminder === true;
 			sendWithCtrlEnter = message.sendWithCtrlEnter === true;
+			fontSizePx =
+				typeof message.fontSizePx === "number" &&
+				Number.isFinite(message.fontSizePx)
+					? Math.max(0, Math.floor(message.fontSizePx))
+					: 0;
 			autopilotEnabled = message.autopilotEnabled === true;
 			autopilotText =
 				typeof message.autopilotText === "string" ? message.autopilotText : "";
@@ -117,6 +122,7 @@ function handleExtensionMessage(event) {
 				typeof message.humanLikeDelayMax === "number"
 					? message.humanLikeDelayMax
 					: DEFAULT_HUMAN_DELAY_MAX;
+			applyConfiguredFontSizePx();
 			updateSoundToggleUI();
 			updateInteractiveApprovalToggleUI();
 			updateAgentOrchestrationToggleUI();

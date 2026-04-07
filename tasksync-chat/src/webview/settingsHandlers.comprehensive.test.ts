@@ -461,6 +461,7 @@ describe("buildSettingsPayload", () => {
 			_autopilotEnabled: true,
 			_autopilotText: "Go ahead",
 			_autopilotPrompts: ["p1"],
+			_fontSizePx: 18,
 			_queueEnabled: false,
 		});
 
@@ -472,6 +473,7 @@ describe("buildSettingsPayload", () => {
 		expect(payload.autopilotEnabled).toBe(true);
 		expect(payload.autopilotText).toBe("Go ahead");
 		expect(payload.autopilotPrompts).toEqual(["p1"]);
+		expect(payload.fontSizePx).toBe(18);
 		expect(payload.queueEnabled).toBe(false);
 		expect(payload.responseTimeout).toBe(30);
 		expect(payload.maxConsecutiveAutoResponses).toBe(5);
@@ -1114,6 +1116,7 @@ describe("handleUpdateRemoteMaxDevices", () => {
 
 		const p = createMockP();
 		const payload = buildSettingsPayload(p);
+		expect(payload.fontSizePx).toBe(0);
 		expect(payload.remoteMaxDevices).toBe(DEFAULT_REMOTE_MAX_DEVICES);
 	});
 });

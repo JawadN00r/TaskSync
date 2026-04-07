@@ -4090,7 +4090,7 @@ button#send-btn:disabled {
 }
 
 .session-thread-title {
-    font-size: var(--tasksync-header-font-size-sm);
+    font-size: var(--tasksync-header-font-size-md);
     font-weight: 600;
     color: var(--vscode-foreground);
     white-space: nowrap;
@@ -4177,7 +4177,7 @@ button#send-btn:disabled {
     border: 1px solid var(--vscode-input-border, var(--vscode-focusBorder));
     border-radius: 3px;
     padding: 1px 4px;
-    font-size: var(--tasksync-input-font-size);
+    font-size: var(--tasksync-header-font-size-md);
     font-family: inherit;
     font-weight: bold;
     width: 100%;
